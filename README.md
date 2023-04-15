@@ -7,3 +7,6 @@ Assignment 1:
               Parser: 97/100
 
 
+Assignment 2: 
+
+              93/96
