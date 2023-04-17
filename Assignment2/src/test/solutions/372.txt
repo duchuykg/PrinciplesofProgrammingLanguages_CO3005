@@ -1,0 +1,3 @@
+Program([
+	VarDecl(x, AutoType, FloatLit(1.0))
+])

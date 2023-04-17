@@ -1,0 +1,4 @@
+Program([
+	VarDecl(a, ArrayType([5, 5, 6], IntegerType), ArrayLit([Id(a), Id(b), Id(b)]))
+	VarDecl(b, ArrayType([5, 5, 6], IntegerType), ArrayCell(a, [BinExpr(::, IntegerLit(1), IntegerLit(2))]))
+])

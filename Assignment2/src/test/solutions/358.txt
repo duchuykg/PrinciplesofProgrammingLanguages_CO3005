@@ -1,0 +1,3 @@
+Program([
+	FuncDecl(a, ArrayType([1], StringType), [Param(a, StringType)], c, BlockStmt([VarDecl(b, AutoType)]))
+])

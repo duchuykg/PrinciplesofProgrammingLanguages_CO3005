@@ -1,0 +1,14 @@
+foo : function integer () {
+while (a==3) {
+    if (a > b) {c : integer = b; return c;}
+    else {
+        continue;
+        break;
+        c : integer = b; return c;
+    }
+}
+    {
+    c : integer = b; return c;
+    }
+}
+c : integer = b; 

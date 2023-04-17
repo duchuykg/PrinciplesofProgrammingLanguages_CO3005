@@ -1,0 +1,1 @@
+a : array [1] of boolean = {a[a+b, c+d, {},0], true, 1, 1., 10.21e2};

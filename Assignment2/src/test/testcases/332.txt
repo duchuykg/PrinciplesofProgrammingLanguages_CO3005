@@ -1,0 +1,4 @@
+aa : function void (){
+    if (a[1,4] == (b >= c)) {}
+   
+}

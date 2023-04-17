@@ -1,0 +1,3 @@
+Program([
+	VarDecl(a, IntegerType, ArrayLit([ArrayLit([IntegerLit(1)]), FuncCall(foo, [ArrayLit([IntegerLit(1)])])]))
+])

@@ -1,0 +1,3 @@
+Program([
+	FuncDecl(a, VoidType, [], None, BlockStmt([CallStmt(super, ), BlockStmt([])]))
+])

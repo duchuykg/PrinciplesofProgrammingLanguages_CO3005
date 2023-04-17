@@ -1,0 +1,5 @@
+Program([
+	VarDecl(a, ArrayType([1, 4, 3], BooleanType), StringLit(helo))
+	VarDecl(b, ArrayType([1, 4, 3], BooleanType), IntegerLit(1))
+	VarDecl(c, ArrayType([1, 4, 3], BooleanType), IntegerLit(2))
+])
