@@ -1,0 +1,7 @@
+a : function void (){
+    readInteger();
+    writef(a);
+    printb(d);
+   {
+   }
+}

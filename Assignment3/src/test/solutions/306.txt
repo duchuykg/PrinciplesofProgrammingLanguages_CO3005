@@ -1,0 +1,5 @@
+Program([
+	VarDecl(a, IntegerType, Id(a))
+	VarDecl(b, IntegerType, FuncCall(foo, []))
+	VarDecl(c, IntegerType, IntegerLit(15))
+])

@@ -1,0 +1,3 @@
+Program([
+	FuncDecl(a, VoidType, [], None, BlockStmt([VarDecl(a, ArrayType([1, 4, 3], BooleanType), StringLit(helo)), VarDecl(b, ArrayType([1, 4, 3], BooleanType), BooleanLit(True)), VarDecl(c, ArrayType([1, 4, 3], BooleanType), BooleanLit(False))]))
+])

@@ -170,8 +170,8 @@ class ASTGeneration(MT22Visitor):
     # dowhilestmt: DO blockstmt WHILE LB expr RB SEMI; 64
     def visitDowhilestmt(self, ctx:MT22Parser.DowhilestmtContext):
         cond = self.visit(ctx.expr())
-        stmt = self.visit(ctx.stmt())
-        return DoWhileStmt(cond, stmt)
+        blockstmt = self.visit(ctx.blockstmt())
+        return DoWhileStmt(cond, blockstmt)
 
 
     # breakstmt: BREAK SEMI; 67

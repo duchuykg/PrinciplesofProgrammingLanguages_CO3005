@@ -1,0 +1,6 @@
+a : function void (){
+    a : integer = 1;
+    continue;
+    do {return 1;} while (a > 1);
+}
+a : function void (){}

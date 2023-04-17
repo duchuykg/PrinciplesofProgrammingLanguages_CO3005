@@ -1,0 +1,3 @@
+Program([
+	VarDecl(foo, BooleanType, FuncCall(preventdefault, []))
+])

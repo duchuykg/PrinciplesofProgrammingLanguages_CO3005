@@ -1,0 +1,12 @@
+a : function void () { }
+a : integer = c;
+a : function integer (){
+    {
+        a : integer;    
+    }
+    {
+        return 1;
+    }
+    {
+    }
+}

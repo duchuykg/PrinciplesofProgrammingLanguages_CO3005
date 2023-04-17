@@ -1,0 +1,3 @@
+Program([
+	VarDecl(n, IntegerType, FuncCall(foo, [Id(x)]))
+])
