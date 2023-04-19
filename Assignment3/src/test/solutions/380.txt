@@ -1,4 +1,0 @@
-Program([
-	FuncDecl(fact, IntegerType, [Param(a, IntegerType)], None, BlockStmt([BreakStmt(), ForStmt(AssignStmt(Id(a), IntegerLit(9123)), FuncCall(foo, [ArrayLit([])]), BinExpr(+, ArrayLit([]), IntegerLit(1122)), DoWhileStmt(BinExpr(==, Id(a), IntegerLit(2)), BlockStmt([ForStmt(AssignStmt(Id(a), IntegerLit(2)), BinExpr(>, Id(a), IntegerLit(3)), BinExpr(+, Id(a), IntegerLit(1)), ReturnStmt(IntegerLit(1)))])))]))
-	VarDecl(a, IntegerType, FloatLit(131.0))
-])

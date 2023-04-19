@@ -1,3 +1,0 @@
-Program([
-	FuncDecl(a, VoidType, [], None, BlockStmt([CallStmt(printInteger, Id(a)), BlockStmt([])]))
-])

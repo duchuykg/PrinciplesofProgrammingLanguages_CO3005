@@ -1,3 +1,0 @@
-Program([
-	VarDecl(a, IntegerType, ArrayLit([Id(True), BooleanLit(True), StringLit(true), FloatLit(0.0)]))
-])

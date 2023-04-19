@@ -1,9 +1,0 @@
-Program([
-	FuncDecl(foo, IntegerType, [], None, BlockStmt([WhileStmt(BinExpr(==, Id(a), IntegerLit(3)), BlockStmt([IfStmt(BinExpr(>, Id(a), Id(b)), BlockStmt([VarDecl(c, IntegerType, Id(b)), VarDecl(d, IntegerType, Id(c)), VarDecl(e, IntegerType, Id(d)), VarDecl(f, IntegerType, Id(a)), ReturnStmt(Id(c))]), BlockStmt([ContinueStmt(), BreakStmt(), VarDecl(c, IntegerType), VarDecl(d, IntegerType), VarDecl(c, IntegerType), VarDecl(c, IntegerType), VarDecl(c, IntegerType), ReturnStmt(Id(c))]))])), BlockStmt([VarDecl(c, IntegerType), VarDecl(d, IntegerType), VarDecl(v, IntegerType), VarDecl(c, IntegerType), VarDecl(a, IntegerType), VarDecl(a, IntegerType), ReturnStmt(Id(c))])]))
-	VarDecl(c, IntegerType)
-	VarDecl(a, IntegerType)
-	VarDecl(s, IntegerType)
-	VarDecl(a, IntegerType)
-	VarDecl(f, IntegerType)
-	VarDecl(d, IntegerType)
-])

@@ -1,3 +1,0 @@
-a : function void (inherit a : integer, out b : array [1] of string) inherit c {
-                   a = ((a[10]::{1,2,foo()})+b(0)) ;
-                }

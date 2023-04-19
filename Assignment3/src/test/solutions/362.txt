@@ -1,3 +1,0 @@
-Program([
-	FuncDecl(a, VoidType, [Param(a, ArrayType([1], IntegerType))], c, BlockStmt([BlockStmt([AssignStmt(ArrayCell(a, [IntegerLit(1)]), FuncCall(foo, [IntegerLit(1)]))])]))
-])

@@ -1,3 +1,0 @@
-Program([
-	FuncDecl(a, ArrayType([1], StringType), [], c, BlockStmt([DoWhileStmt(BinExpr(==, ArrayLit([]), IntegerLit(1)), BlockStmt([ReturnStmt(IntegerLit(1))]))]))
-])

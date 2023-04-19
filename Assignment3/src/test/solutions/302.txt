@@ -1,3 +1,0 @@
-Program([
-	VarDecl(a, ArrayType([1], StringType), ArrayLit([ArrayCell(a, [IntegerLit(0)]), Id(True), IntegerLit(1), FloatLit(1.0), FloatLit(2000.0)]))
-])

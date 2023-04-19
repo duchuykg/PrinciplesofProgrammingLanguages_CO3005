@@ -1,0 +1,6 @@
+
+            b: integer = 1; 
+            main: function void () {} 
+            foo: function void (a: integer, b: integer) {}
+            a: float = 1; 
+        

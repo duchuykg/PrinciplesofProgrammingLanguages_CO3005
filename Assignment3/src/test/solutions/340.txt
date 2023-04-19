@@ -1,3 +1,0 @@
-Program([
-	FuncDecl(a, VoidType, [], None, BlockStmt([CallStmt(foo, BinExpr(+, IntegerLit(2), Id(x)))]))
-])

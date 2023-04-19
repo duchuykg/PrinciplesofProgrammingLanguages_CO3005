@@ -1,3 +1,0 @@
-Program([
-	FuncDecl(fact, IntegerType, [Param(n, AutoType)], None, BlockStmt([ReturnStmt(IntegerLit(1))]))
-])

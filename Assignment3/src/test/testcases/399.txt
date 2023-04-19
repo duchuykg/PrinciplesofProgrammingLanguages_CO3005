@@ -1,4 +1,0 @@
-        fact: function integer (n: auto) {
-            if (n == 0) return ;
-            else return ;
-        }

@@ -1,4 +1,6 @@
-Program([
-	    VarDecl(a, StringType, ArrayLit([]))
-      VarDecl(a, IntegerType, ArrayLit([]))
-    ])
+
+            b: integer = 1; 
+            main: function void () {
+            } 
+            b: float = 1; 
+        

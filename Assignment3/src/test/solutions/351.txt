@@ -1,3 +1,0 @@
-Program([
-	VarDecl(foo, BooleanType, FuncCall(readInter, [Id(c), Id(d)]))
-])

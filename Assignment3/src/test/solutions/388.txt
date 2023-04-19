@@ -1,3 +1,0 @@
-Program([
-	FuncDecl(fact, IntegerType, [Param(a, IntegerType)], None, BlockStmt([BreakStmt(), ForStmt(AssignStmt(Id(a), IntegerLit(1)), BinExpr(>, IntegerLit(2), IntegerLit(1)), BinExpr(+, ArrayLit([IntegerLit(1)]), IntegerLit(1)), ReturnStmt(IntegerLit(1)))]))
-])

@@ -1,5 +1,0 @@
-Program([
-	FuncDecl(a, VoidType, [], None, BlockStmt([]))
-	VarDecl(a, IntegerType, Id(c))
-	FuncDecl(a, IntegerType, [], None, BlockStmt([BlockStmt([VarDecl(a, IntegerType)]), BlockStmt([ReturnStmt(IntegerLit(1))]), BlockStmt([])]))
-])

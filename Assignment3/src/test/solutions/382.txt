@@ -1,5 +1,0 @@
-Program([
-	FuncDecl(fact, IntegerType, [Param(a, IntegerType)], None, BlockStmt([BreakStmt(), ForStmt(AssignStmt(Id(a), IntegerLit(9123)), FuncCall(foo, [ArrayLit([])]), BinExpr(+, ArrayLit([]), IntegerLit(1122)), ReturnStmt(FloatLit(15.0)))]))
-	VarDecl(a, IntegerType, FloatLit(131.0))
-	VarDecl(c, IntegerType, IntegerLit(12))
-])

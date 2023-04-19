@@ -1,3 +1,0 @@
-Program([
-	FuncDecl(a, StringType, [], None, BlockStmt([AssignStmt(Id(a), Id(a))]))
-])

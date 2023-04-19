@@ -1,1 +1,0 @@
-a: function auto (a : boolean) {}

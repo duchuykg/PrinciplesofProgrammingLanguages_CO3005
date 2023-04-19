@@ -1,4 +1,7 @@
 from Visitor import Visitor
+from StaticError import *
+from AST import *
+from abc import ABC
 
 class Symbol:
     def __init__(self, name, mtype, value=None):
@@ -9,15 +12,18 @@ class Symbol:
 class StaticChecker(Visitor):
     def __init__(self, ast):
         self.ast = ast
-        self.global_env = [[]]
+    
+    def check(self):
+        return self.visitProgram(self.ast, [])
         
     # decls: List[Decl]
     def visitProgram(self, ast: Program, o):
+        o = [[]]
         for decl in ast.decls:
             o = self.visit(decl, o)
     
     # name: str, typ: Type, init: Expr or None = None
-    def visitVarDecl(self, ast, o):
+    def visitVarDecl(self, ast: VarDecl, o):
         for symbol in o[0]:
             if symbol.name == ast.name:
                 raise Redeclared(Variable(), ast.name)
@@ -31,14 +37,13 @@ class StaticChecker(Visitor):
             if symbol.name == ast.name:
                 raise Redeclared(Function(), ast.name)
 
-        o[0] += [Symbol(ast.name, ast.typ, None)]
+        o[0] += [Symbol(ast.name, ast.return_type, None)]
         
         env = [[]] + o
     
         for decl in ast.params:
             env = self.visit(decl, env)
-        for decl in ast.body:
-            env = self.visit(decl, env)
+        env = self.visit(ast.body, env)
             
         return o
     
@@ -59,8 +64,11 @@ class StaticChecker(Visitor):
 
     # body: List[Stmt or VarDecl]
     def visitBlockStmt(self, ast, o):
-        pass
+        env = [[]] + o
+        for body in ast.body:
+            env = self.visit(body, env)
 
+        return env
 
     # cond: Expr, tstmt: Stmt, fstmt: Stmt or None = None
     def visitIfStmt(self, ast, o):

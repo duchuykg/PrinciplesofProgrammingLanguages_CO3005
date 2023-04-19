@@ -1,3 +1,0 @@
-Program([
-	FuncDecl(aa, VoidType, [], None, BlockStmt([IfStmt(BinExpr(==, ArrayCell(a, [IntegerLit(1), IntegerLit(4)]), BinExpr(>=, Id(b), Id(c))), BlockStmt([]))]))
-])

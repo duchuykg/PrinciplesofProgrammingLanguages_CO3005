@@ -1,3 +1,0 @@
-Program([
-	VarDecl(a, ArrayType([1], BooleanType), ArrayLit([ArrayCell(a, [BinExpr(+, Id(a), Id(b)), BinExpr(+, Id(c), Id(d)), ArrayLit([]), IntegerLit(0)]), BooleanLit(True), IntegerLit(1), FloatLit(1.0), FloatLit(1021.0)]))
-])

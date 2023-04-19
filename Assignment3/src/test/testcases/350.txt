@@ -1,3 +1,0 @@
-a : function void (){
-    call[c] = call(d) :: call[c];
-}

@@ -1,3 +1,0 @@
-Program([
-	FuncDecl(a, VoidType, [InheritParam(a, IntegerType), InheritOutParam(b, ArrayType([1], FloatType))], c, BlockStmt([ReturnStmt(IntegerLit(1))]))
-])

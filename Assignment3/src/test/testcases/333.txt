@@ -1,3 +1,0 @@
-a : function void (){
-    for (True = 1, foo(1) >= 2, i -foo()) {}
-}

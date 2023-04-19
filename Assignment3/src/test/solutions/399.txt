@@ -1,3 +1,0 @@
-Program([
-	FuncDecl(fact, IntegerType, [Param(n, AutoType)], None, BlockStmt([IfStmt(BinExpr(==, Id(n), IntegerLit(0)), ReturnStmt(), ReturnStmt())]))
-])

@@ -1,4 +1,0 @@
-        fact: function integer ( a : integer) {
-            break;
-            for (a=2 ,foo({}) ,{}+1) return 1;
-        }

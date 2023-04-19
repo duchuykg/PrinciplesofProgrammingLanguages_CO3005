@@ -1,3 +1,0 @@
-Program([
-	FuncDecl(a, IntegerType, [Param(b, StringType)], a, BlockStmt([AssignStmt(ArrayCell(a, [IntegerLit(1), ArrayCell(a, [IntegerLit(0)])]), IntegerLit(2))]))
-])

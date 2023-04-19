@@ -1,3 +1,0 @@
-Program([
-	FuncDecl(a, VoidType, [], None, BlockStmt([DoWhileStmt(Id(a), BlockStmt([ReturnStmt(IntegerLit(1))]))]))
-])

@@ -1,3 +1,0 @@
-Program([
-	FuncDecl(fact, IntegerType, [Param(n, AutoType)], None, BlockStmt([AssignStmt(Id(a), Id(c))]))
-])
