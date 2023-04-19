@@ -133,7 +133,7 @@ def serializedATN():
         buf.write("\5p9\2\u0104+\3\2\2\2\u0105\u0106\7\30\2\2\u0106\u0107")
         buf.write("\7*\2\2\u0107\u0108\5p9\2\u0108\u0109\7+\2\2\u0109\u010a")
         buf.write("\5\34\17\2\u010a-\3\2\2\2\u010b\u010c\7\23\2\2\u010c\u010d")
-        buf.write("\5\34\17\2\u010d\u010e\7\30\2\2\u010e\u010f\7*\2\2\u010f")
+        buf.write("\5:\36\2\u010d\u010e\7\30\2\2\u010e\u010f\7*\2\2\u010f")
         buf.write("\u0110\5p9\2\u0110\u0111\7+\2\2\u0111\u0112\7\60\2\2\u0112")
         buf.write("/\3\2\2\2\u0113\u0114\7\13\2\2\u0114\u0115\7\60\2\2\u0115")
         buf.write("\61\3\2\2\2\u0116\u0117\7\22\2\2\u0117\u0118\7\60\2\2")
@@ -1858,8 +1858,8 @@ class MT22Parser ( Parser ):
         def DO(self):
             return self.getToken(MT22Parser.DO, 0)
 
-        def stmt(self):
-            return self.getTypedRuleContext(MT22Parser.StmtContext,0)
+        def blockstmt(self):
+            return self.getTypedRuleContext(MT22Parser.BlockstmtContext,0)
 
 
         def WHILE(self):
@@ -1899,7 +1899,7 @@ class MT22Parser ( Parser ):
             self.state = 265
             self.match(MT22Parser.DO)
             self.state = 266
-            self.stmt()
+            self.blockstmt()
             self.state = 267
             self.match(MT22Parser.WHILE)
             self.state = 268
