@@ -1,0 +1,7 @@
+
+            foo: function auto (a: integer, b: integer) inherit bar{}
+            m: auto = 2;
+            n: float = - foo(3,4);
+            bar: function auto (b: integer, inherit c: integer) {}
+            main: function void () {}
+        

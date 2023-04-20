@@ -1,9 +1,9 @@
      
             main: function void () {} 
-            i : integer = 1 + true;
+            i : string = 1 + true;
             foo: function void (a: array [1] of integer, c: integer) {
                 foo1();
-                a[1,2] = 3;
+                do {return 1;} while (a > 1);
             }
             foo1: function float () {}
             t: float = 1; 

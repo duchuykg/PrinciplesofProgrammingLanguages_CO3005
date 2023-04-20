@@ -1,0 +1,5 @@
+
+            main: function auto (a: integer, b: integer) inherit bar{}
+            n: auto = !main(3,6);
+            bar: function auto (b: integer, inherit c: integer) {}
+        

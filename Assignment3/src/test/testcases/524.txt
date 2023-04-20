@@ -1,9 +1,10 @@
      
             main: function void () {} 
-            i : integer = 1 + true;
+            i : float = 1 + true;
             foo: function void (a: array [1] of integer, c: integer) {
                 foo1();
-                a[1,2] = 3;
+                for (c = 1, c < 10, c + i)
+                    return 1;
             }
             foo1: function float () {}
             t: float = 1; 

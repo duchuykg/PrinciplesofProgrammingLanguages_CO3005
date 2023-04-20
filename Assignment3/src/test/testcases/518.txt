@@ -3,7 +3,7 @@
             i : integer = 1 + true;
             foo: function void (a: array [1] of integer, c: integer) {
                 foo1();
-                a[1,2] = 3;
+                if (i > 2) return;
             }
             foo1: function float () {}
             t: float = 1; 

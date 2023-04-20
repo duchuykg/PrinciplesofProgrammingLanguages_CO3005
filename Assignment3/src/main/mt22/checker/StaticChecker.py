@@ -4,15 +4,14 @@ from AST import *
 from abc import ABC
 
 class Symbol:
-    # len: len(params)
     # flag: isParam
     # parent: name function inherit || inherit param
-    def __init__(self, name, mtype, len=0, flag=0, parent=None):
+    def __init__(self, name, mtype, flag = 0, parent = None, params = None):
         self.name = name
         self.mtype = mtype
-        self.len = len
         self.flag = flag
         self.parent = parent
+        self.params = params
 
 class Utils:
     def infer(o, name, typ):
@@ -32,11 +31,11 @@ class GetEnv(Visitor):
         
     # name: str, typ: Type, init: Expr or None = None
     def visitVarDecl(self, ast: VarDecl, o):
-        o[0] += [Symbol(ast.name, ast.typ, 0, 0, None)]
+        o[0] += [Symbol(ast.name, ast.typ, 0, None, None)]
     
     # name: str, return_type: Type, params: List[ParamDecl], inherit: str or None, body: List[Stmt or VarDecl]
     def visitFuncDecl(self, ast: FuncDecl, o):
-        o[0] += [Symbol(ast.name, ast.return_type, len(ast.params), 0, ast.inherit)]
+        o[0] += [Symbol(ast.name, ast.return_type, 2, ast.inherit, ast.params)]
         
         # env = [[]] + o  
         # for decl in ast.params:
@@ -63,7 +62,7 @@ class StaticChecker(Visitor):
         
         for arr in env:
             for symbol in arr:
-                if symbol.name == 'main' and type(symbol.mtype) is VoidType and symbol.len == 0:
+                if symbol.name == 'main' and type(symbol.mtype) is VoidType and len(symbol.params) == 0:
                     return
                 
         raise NoEntryPoint()
@@ -77,7 +76,7 @@ class StaticChecker(Visitor):
         if type(ast.typ) is AutoType and ast.init is None:
             raise Invalid(Variable(), ast.name)
         
-        o[0][0] += [Symbol(ast.name, ast.typ, 0, 0, None)]
+        o[0][0] += [Symbol(ast.name, ast.typ, 0, None, None)]
         return o
     
     # name: str, return_type: Type, params: List[ParamDecl], inherit: str or None, body: List[Stmt or VarDecl]
@@ -86,7 +85,7 @@ class StaticChecker(Visitor):
             if symbol.name == ast.name:
                 raise Redeclared(Function(), ast.name)
             
-        o[0][0] += [Symbol(ast.name, ast.return_type, len(ast.params), 0, ast.inherit)]
+        o[0][0] += [Symbol(ast.name, ast.return_type, 2, ast.inherit, ast.params)]
         
         env = [[]] + o[0]
         curr = (env, o[1])
@@ -103,31 +102,28 @@ class StaticChecker(Visitor):
             if symbol.name == ast.name:
                 raise Redeclared(Parameter(), ast.name)
             
-        o[0][0] += [Symbol(ast.name, ast.typ, 0, 1, ast.inherit)]
+        o[0][0] += [Symbol(ast.name, ast.typ, 1, ast.inherit, None)]
         return o
     
 
     # lhs: LHS, rhs: Expr
     def visitAssignStmt(self, ast, o):
-        print(ast.lhs)
         lhs = self.visit(ast.lhs, o)
-        print(lhs)
         rhs = self.visit(ast.rhs, o)
-        print(rhs)
-        if type(lhs) is AutoType and type(rhs) is AutoType:
-            raise TypeMismatchInStatement(ast)
+        # if type(lhs) is AutoType and type(rhs) is AutoType:
+        #     raise TypeMismatchInStatement(ast)
         if type(lhs) is VoidType or type(rhs) is VoidType:
             raise TypeMismatchInStatement(ast)
         if type(lhs) is ArrayType and type(rhs) is ArrayType:
             raise TypeMismatchInStatement(ast)
         if type(lhs) is AutoType:
-            lhs = Utils.infer(o, ast.lhs.name, rhs)
+            lhs = Utils.infer(o[0], ast.lhs.name, rhs)
         if type(rhs) is AutoType:
-            rhs = Utils.infer(o, ast.lhs.name, lhs)            
+            rhs = Utils.infer(o[0], ast.rhs.name, lhs)            
         if type(lhs) is type(rhs):
-            return
+            return type(lhs)
         if type(lhs) is FloatType and type(rhs) is IntegerType:
-            return
+            return type(lhs)
         raise TypeMismatchInStatement(ast)
 
 
@@ -141,26 +137,38 @@ class StaticChecker(Visitor):
         for body in ast.body:
             self.visit(body, (env, o[1]))
 
-
     # cond: Expr, tstmt: Stmt, fstmt: Stmt or None = None
     def visitIfStmt(self, ast, o):
-        pass
+        cond = self.visit(ast.cond, o)
+        if type(cond) is not BooleanType:
+            raise TypeMismatchInStatement(ast)
+        self.visit(ast.tstmt, o)
+        if ast.fstmt is not None:
+            self.visit(ast.fstmt, o)
 
 
     # init: AssignStmt, cond: Expr, upd: Expr, stmt: Stmt
     def visitForStmt(self, ast, o):
-        pass
-
+        init = self.visit(ast.init, o)
+        if init is not IntegerType: 
+            raise TypeMismatchInStatement(ast)
+        upd = self.visit(ast.upd, o)
+        if type(upd) is not IntegerType:
+            raise TypeMismatchInStatement(ast)
+        print(self.visit(ast.stmt, o))
 
     # cond: Expr, stmt: Stmt
     def visitWhileStmt(self, ast, o):
-        pass
+        cond = self.visit(ast.cond, o)
+        if type(cond) is not BooleanType:
+            raise TypeMismatchInStatement(ast)
 
     
     # cond: Expr, stmt: BlockStmt
     def visitDoWhileStmt(self, ast, o):
-        pass
-
+        cond = self.visit(ast.cond, o)
+        if type(cond) is not BooleanType:
+            raise TypeMismatchInStatement(ast)
 
     def visitBreakStmt(self, ast, o):
         pass
@@ -177,12 +185,34 @@ class StaticChecker(Visitor):
 
     # name: str, args: List[Expr]
     def visitCallStmt(self, ast, o):
+        flag = False
+        params = None
         for env in o[1]:
-            for symbol in env:             
-                if symbol.name == ast.name: 
-                    return
-            
-        raise Undeclared(Function(), ast.name)
+            for symbol in env:
+                if symbol.name == ast.name and symbol.flag == 2:
+                    flag = True
+                    params = symbol.params
+                    break
+        if not flag: raise Undeclared(Function(), ast.name)
+        if len(ast.args) != len(symbol.params):
+            raise TypeMismatchInStatement(ast)
+        for i in range(len(ast.args)):
+            lhs = self.visit(ast.args[i], o)
+            rhs = params[i].typ
+            if type(lhs) is VoidType or type(rhs) is VoidType:
+                raise TypeMismatchInStatement(ast)
+            if type(lhs) is ArrayType and type(rhs) is ArrayType:
+                raise TypeMismatchInStatement(ast)
+            if type(lhs) is AutoType:
+                lhs = Utils.infer(o[0], ast.args[i].name, rhs)
+            if type(rhs) is AutoType:
+                rhs = lhs      
+            if type(lhs) is type(rhs):
+                continue
+            if type(lhs) is FloatType and type(rhs) is IntegerType:
+                continue
+                
+            raise TypeMismatchInStatement(ast)
 
         
     # op: str, left: Expr, right: Expr ([[]] ([[]])) 
@@ -191,6 +221,8 @@ class StaticChecker(Visitor):
         e2t = self.visit(ast.right, o)
         
         if ast.op in ['+', '-', '*', '/']:
+            # if type(e1t) is AutoType and type(e2t) is AutoType:
+            #     raise TypeMismatchInExpression(ast)
             if type(e1t) is AutoType and type(e2t) is IntegerType:
                 e1t = Utils.infer(o[0], ast.left.name, IntegerType())
             if type(e1t) is AutoType and type(e2t) is FloatType :
@@ -210,6 +242,8 @@ class StaticChecker(Visitor):
             raise TypeMismatchInExpression(ast)
 
         if ast.op in ['%']:
+            # if type(e1t) is AutoType and type(e2t) is AutoType:
+            #     raise TypeMismatchInExpression(ast)
             if type(e1t) is AutoType and type(e2t) is IntegerType:
                 e1t = Utils.infer(o[0], ast.left.name, IntegerType())
             if type(e2t) is AutoType and type(e1t) is IntegerType:
@@ -218,18 +252,88 @@ class StaticChecker(Visitor):
                 return IntegerType()
             raise TypeMismatchInExpression(ast)
         
-        if ast.op in ["&&", "||", "!"]:
-            if type(e1t) is AutoType:
+        if ast.op in ["&&", "||"]:
+            # if type(e1t) is AutoType and type(e2t) is AutoType:
+            #     raise TypeMismatchInExpression(ast)
+            if type(e1t) is AutoType and type(e2t) is BooleanType:
                 e1t = Utils.infer(o[0], ast.left.name, BooleanType())
-            if type(e2t) is AutoType:
+            if type(e2t) is AutoType and type(e1t) is BooleanType:
                 e2t = Utils.infer(o[0], ast.right.name, BooleanType())
             if type(e1t) is BooleanType and type(e2t) is BooleanType:
                 return BooleanType()
             raise TypeMismatchInExpression(ast)
-            
+        
+        if ast.op in ["::"]:
+            # if type(e1t) is AutoType and type(e2t) is AutoType:
+            #     raise TypeMismatchInExpression(ast)
+            if type(e1t) is AutoType and type(e2t) is StringType:
+                e1t = Utils.infer(o[0], ast.left.name, StringType())
+            if type(e2t) is AutoType and type(e1t) is StringType:
+                e2t = Utils.infer(o[0], ast.right.name, StringType())
+            if type(e1t) is StringType and type(e2t) is StringType:
+                return StringType()
+            raise TypeMismatchInExpression(ast)
+        
+        if ast.op in ['==', '!=']:
+            # if type(e1t) is AutoType and type(e2t) is AutoType:
+            #     raise TypeMismatchInExpression(ast)
+            if type(e1t) is AutoType and type(e2t) is IntegerType:
+                e1t = Utils.infer(o[0], ast.left.name, IntegerType())
+            if type(e1t) is AutoType and type(e2t) is BooleanType :
+                e1t = Utils.infer(o[0], ast.left.name, BooleanType())
+            if type(e2t) is AutoType and type(e1t) is IntegerType:
+                e2t =  Utils.infer(o[0], ast.right.name, IntegerType())
+            if type(e2t) is AutoType and type(e1t) is BooleanType:
+                e2t =  Utils.infer(o[0], ast.right.name, BooleanType())
+            if type(e1t) is IntegerType and type(e2t) is IntegerType:
+                return BooleanType()
+            if type(e1t) is BooleanType and type(e2t) is BooleanType:
+                return BooleanType()
+            if type(e1t) is IntegerType and type(e2t) is BooleanType:
+                return BooleanType()
+            if type(e1t) is BooleanType and type(e2t) is IntegerType:
+                return BooleanType()
+            raise TypeMismatchInExpression(ast)
+        
+        if ast.op in ['<', '>', '<=', '>=']:
+            # if type(e1t) is AutoType and type(e2t) is AutoType:
+            #     raise TypeMismatchInExpression(ast)
+            if type(e1t) is AutoType and type(e2t) is IntegerType:
+                e1t = Utils.infer(o[0], ast.left.name, IntegerType())
+            if type(e1t) is AutoType and type(e2t) is FloatType :
+                e1t = Utils.infer(o[0], ast.left.name, FloatType())
+            if type(e2t) is AutoType and type(e1t) is IntegerType:
+                e2t =  Utils.infer(o[0], ast.right.name, IntegerType())
+            if type(e2t) is AutoType and type(e1t) is FloatType:
+                e2t =  Utils.infer(o[0], ast.right.name, FloatType())
+            if type(e1t) is IntegerType and type(e2t) is IntegerType:
+                return BooleanType()
+            if type(e1t) is FloatType and type(e2t) is FloatType:
+                return BooleanType()
+            if type(e1t) is IntegerType and type(e2t) is FloatType:
+                return BooleanType()
+            if type(e1t) is FloatType and type(e2t) is IntegerType:
+                return BooleanType()
+            raise TypeMismatchInExpression(ast)
+    
     # op: str, val: Expr
     def visitUnExpr(self, ast: UnExpr, o):
-        pass
+        e1t = self.visit(ast.val, o)
+        if ast.op in ['-']:
+            if type(e1t) is AutoType:
+                e1t = Utils.infer(o[0], ast.value.name, FloatType())
+            if type(e1t) is FloatType:
+                return FloatType()
+            if type(e1t) is IntegerType:
+                return IntegerType()
+            raise TypeMismatchInExpression(ast)
+        
+        if ast.op in ['!']:
+            if type(e1t) is AutoType:
+                e1t = Utils.infer(o[0], ast.value.name, BooleanType())
+            if type(e1t) is BooleanType:
+                return BooleanType()
+            raise TypeMismatchInExpression(ast)
 
     # name: str
     def visitId(self, ast: Id, o):
@@ -244,8 +348,12 @@ class StaticChecker(Visitor):
     def visitArrayCell(self, ast, o):
         for env in o[0]:
             for symbol in env:
-                ### Rang buoc E2
                 if symbol.name == ast.name and type(symbol.mtype) == ArrayType:
+                     ### Rang buoc E2
+                    for expr in ast.cell:
+                        typ = self.visit(expr, o)
+                        if type(typ) is not IntegerType:
+                            raise TypeMismatchInExpression(ast)         
                     return
                     
         raise TypeMismatchInExpression(ast)         
@@ -274,18 +382,33 @@ class StaticChecker(Visitor):
 
     # name: str, args: List[Expr]
     def visitFuncCall(self, ast, o):
+        flag = False
+        params = None
         for env in o[1]:
-            for symbol in env:             
-                if symbol.name == ast.name:
-                    if type(symbol.mtype) is VoidType:
-                        raise TypeMismatchInExpression(ast)
-                    if len(ast.args) != symbol.len:
-                        raise TypeMismatchInExpression(ast)
-                    return
-        
-        raise Undeclared(Function(), ast.name)
-
-
+            for symbol in env:
+                if symbol.name == ast.name and symbol.flag == 2:
+                    flag = True
+                    params = symbol.params
+                    break
+        if not flag: raise Undeclared(Function(), ast.name)
+        if len(ast.args) != len(symbol.params):
+            raise TypeMismatchInExpression(ast)
+        for i in range(len(ast.args)):
+            lhs = self.visit(ast.args[i], o)
+            rhs = params[i].typ
+            if type(lhs) is VoidType or type(rhs) is VoidType:
+                raise TypeMismatchInExpression(ast)
+            if type(lhs) is ArrayType and type(rhs) is ArrayType:
+                raise TypeMismatchInExpression(ast)
+            if type(lhs) is AutoType:
+                lhs = Utils.infer(o[0], ast.args[i].name, rhs)
+            if type(rhs) is AutoType:
+                rhs = lhs      
+            if type(lhs) is type(rhs):
+                continue
+            if type(lhs) is FloatType and type(rhs) is IntegerType:
+                continue
+            raise TypeMismatchInExpression(ast)
 
     def visitIntegerType(self, ast, o):
         return IntegerType()

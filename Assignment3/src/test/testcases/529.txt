@@ -1,0 +1,14 @@
+     
+            main: function void () {} 
+            i : float = 1 + true;
+            foo2: function integer (d: integer, e: string){}
+            foo: function integer (a: array [1] of integer, c: auto) {
+                d : integer;
+                foo2(d, c);
+                break;
+                for (d = 1, d < 10, 1 + 2)
+                    return 1;
+            }
+            foo1: function float () {}
+            t: float = 1; 
+        
