@@ -1,0 +1,8 @@
+     
+            a : auto;
+            main: function void () {} 
+            foo: function void (a: auto, c: integer) {
+                c = a; 
+            }
+            t: float = 1; 
+        

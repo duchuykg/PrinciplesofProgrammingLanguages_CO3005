@@ -155,9 +155,6 @@ class TestChecker:
         TestChecker.check(SOL_DIR, asttree, num)
         dest = open(os.path.join(SOL_DIR, str(num) + ".txt"), "r")
         line = dest.read()
-        print(num)
-        print(line)
-        print(expect)
         return line == expect
  
     @staticmethod
