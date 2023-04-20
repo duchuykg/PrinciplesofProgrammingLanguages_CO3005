@@ -1,0 +1,6 @@
+
+            main: function auto (a: integer, b: integer) inherit bar{}
+            m: auto = 2;
+            n: float = main(3);
+            bar: function auto (b: integer, inherit c: integer) {}
+        

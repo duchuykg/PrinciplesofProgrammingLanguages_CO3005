@@ -1,0 +1,10 @@
+     
+            main: function void () {} 
+            i : integer = 1 + true;
+            foo: function void (a: auto, c: float) {
+                c =  true; 
+                foo1();
+            }
+            foo1: function float () {}
+            t: float = 1; 
+        

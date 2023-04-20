@@ -10,7 +10,7 @@
                 {
                     d: integer = 1;
                 }
-                d : integer = 1;
+                d : integer = 1 + true;
                 a : integer = 1;
             }
             t: float = 1; 

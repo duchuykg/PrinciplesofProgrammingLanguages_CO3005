@@ -1,0 +1,7 @@
+
+            main: function auto (a: integer, b: integer) inherit bar{
+                i: auto = 2.5;
+                for (i = 1, i <= 5, i + 1){}
+            }
+            bar: function auto (b: integer, inherit c: integer) {}
+        

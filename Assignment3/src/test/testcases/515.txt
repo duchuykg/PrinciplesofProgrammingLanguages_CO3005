@@ -1,0 +1,9 @@
+       
+            t: float = 1;      
+            foo: function void (a: array [1] of integer, c: integer) {
+                a[4] = c; 
+            }
+            main: function void () {
+                t = foo();
+            }  
+        

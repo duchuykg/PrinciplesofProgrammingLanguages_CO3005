@@ -1,0 +1,9 @@
+
+            main: function auto (a: integer, b: integer) inherit bar{
+                m: auto = 3.5;
+                if (bar(2,5)) {
+                    t: string = "hello";
+                }
+            }
+            bar: function auto (b: integer, inherit c: integer) {}
+        

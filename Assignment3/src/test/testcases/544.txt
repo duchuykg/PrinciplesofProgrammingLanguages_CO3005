@@ -1,0 +1,9 @@
+
+            main: function auto (a: integer, b: integer) inherit bar{
+                m: auto = 3.5;
+                while (bar(3,2)) {
+                    t: auto;
+                }
+            }
+            bar: function auto (b: integer, inherit c: integer) {}
+        

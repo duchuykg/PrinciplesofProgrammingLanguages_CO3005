@@ -1,7 +1,7 @@
   
         main: function void () {}    
             foo: function void (a: array [1] of integer, c: integer) {
-                c[4] = c; 
+                d[4] = c; 
             }
             t: float = 1; 
         
