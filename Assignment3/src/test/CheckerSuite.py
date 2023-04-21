@@ -890,13 +890,16 @@ class CheckerSuite(unittest.TestCase):
                 d : integer;
                 foo2(d, c);
                 break;
-                for (d = 1, d < 10, 1 + 2)
+                for (d = 1, d < 10, 1 + 2){
                     return 1;
+                    break;
+                    if (d == 1) break;
+                }
             }
             foo1: function float () {}
             t: float = 1; 
         """
-        expect = ""
+        expect = "Must in loop: BreakStmt()"
         self.assertTrue(TestChecker.test(input, expect, 529))
         
     def test_32(self):

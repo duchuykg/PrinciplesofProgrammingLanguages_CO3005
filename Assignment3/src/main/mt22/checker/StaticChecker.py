@@ -20,13 +20,13 @@ class Utils:
                 if symbol.name == name:
                     symbol.mtype = typ
                     return typ
+
 class GetEnv(Visitor):
     # decls: List[Decl]
     def visitProgram(self, ast: Program, o):
         o = [[]]
         for decl in ast.decls:
             self.visit(decl, o)
-        
         return o
         
     # name: str, typ: Type, init: Expr or None = None
@@ -45,8 +45,9 @@ class GetEnv(Visitor):
     # def visitParamDecl(self, ast, o):
     #     o[0] += [Symbol(ast.name, ast.typ, 0, 1, ast.inherit)]
 class StaticChecker(Visitor):
-    def __init__(self, ast):
+    def __init__(self, ast, flag = 0):
         self.ast = ast
+        self.flag = flag
     
     def check(self):
         return self.visitProgram(self.ast, [])
@@ -149,34 +150,37 @@ class StaticChecker(Visitor):
 
     # init: AssignStmt, cond: Expr, upd: Expr, stmt: Stmt
     def visitForStmt(self, ast, o):
+        self.flag += 1
         init = self.visit(ast.init, o)
         if init is not IntegerType: 
             raise TypeMismatchInStatement(ast)
         upd = self.visit(ast.upd, o)
         if type(upd) is not IntegerType:
             raise TypeMismatchInStatement(ast)
-        print(self.visit(ast.stmt, o))
+        self.flag -= 1
 
     # cond: Expr, stmt: Stmt
     def visitWhileStmt(self, ast, o):
+        self.flag += 1
         cond = self.visit(ast.cond, o)
         if type(cond) is not BooleanType:
             raise TypeMismatchInStatement(ast)
-
+        self.flag -= 1
     
     # cond: Expr, stmt: BlockStmt
     def visitDoWhileStmt(self, ast, o):
+        self.flag += 1
         cond = self.visit(ast.cond, o)
         if type(cond) is not BooleanType:
             raise TypeMismatchInStatement(ast)
-
+        self.flag -= 1
     def visitBreakStmt(self, ast, o):
-        pass
-
+        if self.flag == 0:
+            raise MustInLoop(ast)
 
     def visitContinueStmt(self, ast, o):
-        pass
-
+        if self.flag == 0:
+            raise MustInLoop(ast)
 
     # expr: Expr or None = None
     def visitReturnStmt(self, ast, o):

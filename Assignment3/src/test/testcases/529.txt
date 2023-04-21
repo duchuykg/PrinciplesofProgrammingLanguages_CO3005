@@ -5,9 +5,11 @@
             foo: function integer (a: array [1] of integer, c: auto) {
                 d : integer;
                 foo2(d, c);
-                break;
-                for (d = 1, d < 10, 1 + 2)
+                for (d = 1, d < 10, 1 + 2){
                     return 1;
+                    break;
+                    if (d == 1) break;
+                }
             }
             foo1: function float () {}
             t: float = 1; 
