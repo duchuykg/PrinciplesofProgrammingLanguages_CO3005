@@ -1,8 +1,7 @@
      
             main: function void () {} 
-            i : float = 1 + true;
+            i : float = 1;
             foo: function void (a: array [1] of integer, c: integer) {
-                foo1();
                 for (c = 1, c < 10, c + i)
                     return 1;
             }

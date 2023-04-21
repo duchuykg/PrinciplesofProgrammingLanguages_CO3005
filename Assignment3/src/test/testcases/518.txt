@@ -1,10 +1,9 @@
      
             main: function void () {} 
-            i : integer = 1 + true;
+            i : float = foo1();
             foo: function void (a: array [1] of integer, c: integer) {
-                foo1();
                 if (i > 2) return;
             }
-            foo1: function float () {}
+            foo1: function auto () {}
             t: float = 1; 
         

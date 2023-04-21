@@ -76,8 +76,24 @@ class StaticChecker(Visitor):
         
         if type(ast.typ) is AutoType and ast.init is None:
             raise Invalid(Variable(), ast.name)
+
+        o[0][0] += [Symbol(ast.name, ast.typ, 0, None, None)] 
+        if ast.init is not None:
+            rhs = self.visit(ast.init, o)           
+            lhs = ast.typ
+            if type(lhs) is AutoType and type (rhs) is AutoType:
+                raise TypeMismatchInVarDecl(ast)
+            if type(lhs) is AutoType:
+                lhs = rhs
+            # Duyet qua toan bo
+            if type(rhs) is AutoType:
+                rhs = Utils.infer(o[0], ast.init.name, lhs)
+                rhs = Utils.infer(o[1], ast.init.name, lhs)
+            if type(lhs) is FloatType and type(rhs) is IntegerType:
+                return o
+            if type(rhs) is not type(lhs):
+                raise TypeMismatchInVarDecl(ast)
         
-        o[0][0] += [Symbol(ast.name, ast.typ, 0, None, None)]
         return o
     
     # name: str, return_type: Type, params: List[ParamDecl], inherit: str or None, body: List[Stmt or VarDecl]
@@ -120,7 +136,7 @@ class StaticChecker(Visitor):
         if type(lhs) is AutoType:
             lhs = Utils.infer(o[0], ast.lhs.name, rhs)
         if type(rhs) is AutoType:
-            rhs = Utils.infer(o[0], ast.rhs.name, lhs)            
+            rhs = Utils.infer(o[0], ast.rhs.name, lhs)
         if type(lhs) is type(rhs):
             return type(lhs)
         if type(lhs) is FloatType and type(rhs) is IntegerType:
@@ -191,11 +207,13 @@ class StaticChecker(Visitor):
     def visitCallStmt(self, ast, o):
         flag = False
         params = None
+        typ = None
         for env in o[1]:
             for symbol in env:
                 if symbol.name == ast.name and symbol.flag == 2:
                     flag = True
                     params = symbol.params
+                    typ = symbol.mtype
                     break
         if not flag: raise Undeclared(Function(), ast.name)
         if len(ast.args) != len(symbol.params):
@@ -215,9 +233,11 @@ class StaticChecker(Visitor):
                 continue
             if type(lhs) is FloatType and type(rhs) is IntegerType:
                 continue
-                
+            
             raise TypeMismatchInStatement(ast)
-
+        if type(typ) is not AutoType and type(typ) is not VoidType:
+            raise TypeMismatchInStatement(ast)
+        
         
     # op: str, left: Expr, right: Expr ([[]] ([[]])) 
     def visitBinExpr(self, ast: BinExpr, o):
@@ -381,18 +401,28 @@ class StaticChecker(Visitor):
 
     # explist: List[Expr]
     def visitArrayLit(self, ast, o):
-            
-        return ArrayType()
+        typ = None
+        if len(ast.explist) > 0:
+            typ = self.visit(ast.explist[0], o)
+        for expr in ast.explist:
+            rhs = self.visit(expr, o)
+            if type(typ) is not type(rhs):
+                raise IllegalArrayLiteral(ast)
+                # { {1 , 2}, { 1,1.5} } ArrayLit([ArrayLit([IntegerLit(1), IntegerLit(2)]), ArrayLit([IntegerLit(1),, FloatLit(1.5)])])
+
+        return ArrayType(ast.explist, typ)
 
     # name: str, args: List[Expr]
     def visitFuncCall(self, ast, o):
         flag = False
         params = None
+        func_type = None
         for env in o[1]:
             for symbol in env:
                 if symbol.name == ast.name and symbol.flag == 2:
                     flag = True
                     params = symbol.params
+                    func_type = symbol.mtype
                     break
         if not flag: raise Undeclared(Function(), ast.name)
         if len(ast.args) != len(symbol.params):
@@ -413,6 +443,8 @@ class StaticChecker(Visitor):
             if type(lhs) is FloatType and type(rhs) is IntegerType:
                 continue
             raise TypeMismatchInExpression(ast)
+        
+        return func_type
 
     def visitIntegerType(self, ast, o):
         return IntegerType()
@@ -429,7 +461,7 @@ class StaticChecker(Visitor):
     def visitStringType(self, ast, o):
         return StringType()
 
-    # List[int], typ
+    # dimensions: List[int], typ: AtomicType
     def visitArrayType(self, ast, o):
         return ArrayType()
 

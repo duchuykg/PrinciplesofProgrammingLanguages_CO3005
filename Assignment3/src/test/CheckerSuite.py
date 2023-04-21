@@ -690,9 +690,8 @@ class CheckerSuite(unittest.TestCase):
     def test_17(self):
         input = """     
             main: function void () {} 
-            i : integer = 1 + true;
+            i : integer = 1;
             foo: function void (a: array [1] of integer, c: integer) {
-                foo1();
                 a[1,2] = 3;
             }
             foo1: function float () {}
@@ -704,12 +703,11 @@ class CheckerSuite(unittest.TestCase):
     def test_18(self):
         input = """     
             main: function void () {} 
-            i : integer = 1 + true;
+            i : float = foo1();
             foo: function void (a: array [1] of integer, c: integer) {
-                foo1();
                 if (i > 2) return;
             }
-            foo1: function float () {}
+            foo1: function auto () {}
             t: float = 1; 
         """
         expect = ""
@@ -718,9 +716,8 @@ class CheckerSuite(unittest.TestCase):
     def test_19(self):
         input = """     
             main: function void () {} 
-            i : string = 1 + true;
+            i : string = "elo";
             foo: function void (a: array [1] of integer, c: integer) {
-                foo1();
                 if (i > 2) return;
             }
             foo1: function float () {}
@@ -732,9 +729,8 @@ class CheckerSuite(unittest.TestCase):
     def test_20(self):
         input = """     
             main: function void () {} 
-            i : string = 1 + true;
+            i : string = "elo";
             foo: function void (a: array [1] of integer, c: integer) {
-                foo1();
                 if ("1" :: " ") return;
             }
             foo1: function float () {}
@@ -746,9 +742,8 @@ class CheckerSuite(unittest.TestCase):
     def test_21(self):
         input = """     
             main: function void () {} 
-            i : string = 1 + true;
+            i : string = "elo";
             foo: function void (a: array [1] of integer, c: integer) {
-                foo1();
                 do {return 1;} while (a > 1);
             }
             foo1: function float () {}
@@ -760,9 +755,8 @@ class CheckerSuite(unittest.TestCase):
     def test_22(self):
         input = """     
             main: function void () {} 
-            i : string = 1 + true;
+            i : string = "Duc Huy";
             foo: function void (a: array [1] of integer, c: integer) {
-                foo1();
                 if ("1" :: " ") return;
             }
             foo1: function float () {}
@@ -774,9 +768,8 @@ class CheckerSuite(unittest.TestCase):
     def test_23(self):
         input = """     
             main: function void () {} 
-            i : string = 1 + true;
+            i : string = "handsome";
             foo: function void (a: array [1] of integer, c: integer) {
-                foo1();
                 for (i = 1, i < 10, i + 1)
                     return 1;
             }
@@ -789,9 +782,8 @@ class CheckerSuite(unittest.TestCase):
     def test_24(self):
         input = """     
             main: function void () {} 
-            i : float = 1 + true;
+            i : float = 1;
             foo: function void (a: array [1] of integer, c: integer) {
-                foo1();
                 for (c = 1, c < 10, c + i)
                     return 1;
             }
@@ -804,9 +796,8 @@ class CheckerSuite(unittest.TestCase):
     def test_25(self):
         input = """     
             main: function void () {} 
-            i : float = 1 + true;
+            i : float = 1;
             foo: function void (a: array [1] of integer, c: float) {
-                foo1();
                 for (c = 1, c < 10, 1 + 2)
                     return 1;
             }
@@ -819,7 +810,8 @@ class CheckerSuite(unittest.TestCase):
     def test_26(self):
         input = """     
             main: function void () {} 
-            i : float = 1 + true;
+            i : float = 1;
+            foo3: function void (d: integer, e: string){}            
             foo2: function integer (d: integer, e: integer){}
             foo: function integer (a: array [1] of integer, c: integer) {
                 foo2(c, c, c);
@@ -835,25 +827,10 @@ class CheckerSuite(unittest.TestCase):
     def test_27(self):
         input = """     
             main: function void () {} 
-            i : float = 1 + true;
+            i : float = 1;
+            foo3: function void (d: integer, e: string){}
             foo2: function integer (d: integer, e: string){}
             foo: function integer (a: array [1] of integer, c: integer) {
-                foo2(c, c);
-                for (c = 1, c < 10, 1 + 2)
-                    return 1;
-            }
-            foo1: function float () {}
-            t: float = 1; 
-        """
-        expect = "Type mismatch in statement: CallStmt(foo2, Id(c), Id(c))"
-        self.assertTrue(TestChecker.test(input, expect, 527))
-        
-    def test_27(self):
-        input = """     
-            main: function void () {} 
-            i : float = 1 + true;
-            foo2: function integer (d: integer, e: string){}
-            foo: function integer (a: array [1] of integer, c: auto) {
                 foo2(c, c);
                 for (c = 1, c < 10, 1 + 2)
                     return 1;
@@ -867,11 +844,12 @@ class CheckerSuite(unittest.TestCase):
     def test_28(self):
         input = """     
             main: function void () {} 
-            i : float = 1 + true;
+            i : float = 1;
+            foo3: function void (d: integer, e: string){}
             foo2: function integer (d: integer, e: string){}
             foo: function integer (a: array [1] of integer, c: auto) {
                 d : integer;
-                foo2(d, c);
+                foo3(d, c);
                 for (c = 1, c < 10, 1 + 2)
                     return 1;
             }
@@ -884,12 +862,13 @@ class CheckerSuite(unittest.TestCase):
     def test_29(self):
         input = """     
             main: function void () {} 
-            i : float = 1 + true;
+            i : float = 1;
+            foo3: function void (d: integer, e: string){}
             foo2: function integer (d: integer, e: string){}
             foo: function integer (a: array [1] of integer, c: auto) {
                 d : integer;
-                foo2(d, c);
-                break;
+                foo3(d, c);
+                if (d == 1) break;
                 for (d = 1, d < 10, 1 + 2){
                     return 1;
                     break;
@@ -901,23 +880,79 @@ class CheckerSuite(unittest.TestCase):
         """
         expect = "Must in loop: BreakStmt()"
         self.assertTrue(TestChecker.test(input, expect, 529))
+    
+    def test_30(self):
+        input = """     
+            main: function void () {
+                a: array[2,2] of integer = {{3,4},{3,4}};
+                b: array [1] of integer = { {1 , 2}, { 1,1.5} };
+            } 
+            i : float = 1;
+            foo2: function integer (d: integer, e: string){}
+            foo: function integer (a: array [1] of integer, c: auto) {
+                d : integer;
+                foo2(d, c);
+                if (d == 1) break;
+                for (d = 1, d < 10, 1 + 2){
+                    return 1;
+                    break;
+                    if (d == 1) break;
+                }
+            }
+            foo1: function float () {}
+            t: float = 1; 
+        """
+        expect = "Illegal array literal: ArrayLit([IntegerLit(1), FloatLit(1.5)])"
+        self.assertTrue(TestChecker.test(input, expect, 530))
+        
+    def test_31(self):
+        input = """     
+            main: function void () {
+                a: array[2,2] of integer = {{3,4},{3,4}};
+                b: array [1] of integer = {};
+            } 
+            i : float = 1;
+            foo3: function void (d: integer, e: string){}
+            foo2: function integer (d: integer, e: string){}
+            foo: function integer (a: array [1] of integer, c: auto) {
+                d : integer;
+                foo3(d, c);
+                for (d = 1, d < 10, 1 + 2){
+                    return 1;
+                    break;
+                    if (d == 1) break;
+                }
+            }
+            foo1: function float () {}
+            t: float = 1; 
+        """
+        expect = ""
+        self.assertTrue(TestChecker.test(input, expect, 531))
         
     def test_32(self):
         input = """
             main: function auto (a: integer, b: integer) inherit bar{}
-            n: auto = !n;
-            foo: function auto (b: integer) {}
+            n: integer = n;
+            foo: function auto (b: integer) {
+                n: integer = n;
+            }
         """
         expect = "No entry point"
         self.assertTrue(TestChecker.test(input, expect, 532))
-
-    # def test_34(self):
-    #     input = """
-    #         foo: function auto (a: integer, b: integer) inherit bar{}
-    #         m: auto = 2;
-    #         n: float = - foo(3,4);
-    #         bar: function auto (b: integer, inherit c: integer) {}
-    #         main: function void () {}
-    #     """
-    #     expect = "Type mismatch in expression: UnExpr(-, FuncCall(main, [IntegerLit(3), IntegerLit(4)]))"
-    #     self.assertTrue(TestChecker.test(input, expect, 534))
+    def test_33(self):
+        input = """     
+            main: function void () {} 
+            i : float = 1;
+            foo3: function void (d: integer, e: string){}
+            foo2: function integer (d: integer, e: string){}
+            foo: function integer (a: array [1] of integer, c: auto) {
+                foo2(c, c);
+                for (c = 1, c < 10, 1 + 2)
+                    return 1;
+            }
+            foo1: function float () {}
+            t: float = 1; 
+        """
+        expect = "Type mismatch in statement: CallStmt(foo2, Id(c), Id(c))"
+        self.assertTrue(TestChecker.test(input, expect, 533))
+   

@@ -1,13 +1,19 @@
      
-            main: function void () {} 
+            main: function void () {
+                a: array[2,2] of integer = {{3,4},{3,4}};
+                b: array [1] of integer = {};
+            } 
             i : float = 1;
             foo3: function void (d: integer, e: string){}
             foo2: function integer (d: integer, e: string){}
             foo: function integer (a: array [1] of integer, c: auto) {
                 d : integer;
                 foo3(d, c);
-                for (c = 1, c < 10, 1 + 2)
+                for (d = 1, d < 10, 1 + 2){
                     return 1;
+                    break;
+                    if (d == 1) break;
+                }
             }
             foo1: function float () {}
             t: float = 1; 

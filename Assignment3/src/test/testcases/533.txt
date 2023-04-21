@@ -1,5 +1,13 @@
-
-            main: function auto (a: integer, b: integer) inherit bar{}
-            n: auto = !main(3,6);
-            bar: function auto (b: integer, inherit c: integer) {}
+     
+            main: function void () {} 
+            i : float = 1;
+            foo3: function void (d: integer, e: string){}
+            foo2: function integer (d: integer, e: string){}
+            foo: function integer (a: array [1] of integer, c: auto) {
+                foo2(c, c);
+                for (c = 1, c < 10, 1 + 2)
+                    return 1;
+            }
+            foo1: function float () {}
+            t: float = 1; 
         

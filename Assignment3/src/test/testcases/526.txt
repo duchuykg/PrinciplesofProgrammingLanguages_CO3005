@@ -1,6 +1,7 @@
      
             main: function void () {} 
-            i : float = 1 + true;
+            i : float = 1;
+            foo3: function void (d: integer, e: string){}            
             foo2: function integer (d: integer, e: integer){}
             foo: function integer (a: array [1] of integer, c: integer) {
                 foo2(c, c, c);

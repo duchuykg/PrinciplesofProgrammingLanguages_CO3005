@@ -1,5 +1,7 @@
 
             main: function auto (a: integer, b: integer) inherit bar{}
-            n: auto = !n;
-            foo: function auto (b: integer) {}
+            n: integer = n;
+            foo: function auto (b: integer) {
+                n: integer = n;
+            }
         
