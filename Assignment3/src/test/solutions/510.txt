@@ -1,1 +1,1 @@
-Invalid Variable: a
+Redeclared Variable: c

@@ -1,9 +1,4 @@
-     
-            main: function void () {} 
-            i : float = foo1();
-            foo: function void (a: array [1] of integer, c: integer) {
-                if (i > 2) return;
-            }
-            foo1: function auto () {}
-            t: float = 1; 
+
+            t: float = true + 2;
+            main: function void() {}
         

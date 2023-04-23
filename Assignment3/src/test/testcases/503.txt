@@ -1,8 +1,7 @@
 
             b: integer = 1; 
-            main: function void () {} 
-            foo: function void (a: auto, a: integer) {
-                t: float = 1; 
-            }
+            foo: function void () {} 
+            main: function void (a: integer, a: integer) {}
             t: float = 1; 
+            main: function void() {}
         

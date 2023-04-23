@@ -1,18 +1,9 @@
-     
-            main: function void () {} 
-            i : float = 1;
-            foo3: function void (d: integer, e: string){}
-            foo2: function integer (d: integer, e: string){}
-            foo: function integer (a: array [1] of integer, c: auto) {
-                d : integer;
-                foo3(d, c);
-                if (d == 1) break;
-                for (d = 1, d < 10, 1 + 2){
-                    return 1;
-                    break;
-                    if (d == 1) break;
-                }
+
+            too: function auto (a: integer, b: integer) inherit bar{
+                super(2,3);
+                d: boolean = true;
+                n: auto = c == d;
             }
-            foo1: function float () {}
-            t: float = 1; 
+            bar: function auto (b: integer, inherit c: integer) {}
+            main: function void() {}
         

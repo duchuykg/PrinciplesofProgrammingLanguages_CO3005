@@ -1,0 +1,11 @@
+
+            foo: function auto (a: integer) inherit too  {
+                super(2, 3);
+                while (true) {
+                    a = a + 2;
+                }
+                break;
+            } 
+            too: function auto (a: integer, inherit b: integer) {}
+            main: function void() {}
+        

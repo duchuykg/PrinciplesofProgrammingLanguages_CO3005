@@ -3,4 +3,5 @@
             main: function void () {} 
             b: function void (a: integer, b: integer) {}
             t: float = 1; 
+            main: function void() {}
         

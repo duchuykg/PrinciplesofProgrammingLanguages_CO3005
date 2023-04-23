@@ -1,0 +1,8 @@
+
+            foo: function auto (a: integer) inherit too  {
+                super(2, 3);
+                b = a + 3.4;
+            } 
+            too: function auto (a: integer, inherit b: integer) {}
+            main: function void() {}
+        

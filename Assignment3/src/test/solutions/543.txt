@@ -1,1 +1,1 @@
-No entry point
+Type mismatch in statement: WhileStmt(Id(m), BlockStmt([VarDecl(t, AutoType)]))

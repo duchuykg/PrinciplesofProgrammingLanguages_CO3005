@@ -1,0 +1,4 @@
+
+            foo: function auto (a: integer, b: integer) {}
+            main: function auto () {}
+        

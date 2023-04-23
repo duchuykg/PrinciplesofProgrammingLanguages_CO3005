@@ -1,7 +1,8 @@
 
-            main: function auto (a: integer, b: integer) inherit bar{}
-            n: integer = n;
-            foo: function auto (b: integer) {
-                n: integer = n;
+            too: function auto (a: integer, b: integer) inherit bar{
+                super(2,3);
             }
+            n: auto = !n;
+            bar: function auto (b: integer, inherit c: integer) {}
+            main: function void() {}
         

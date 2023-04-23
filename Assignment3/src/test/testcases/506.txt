@@ -1,17 +1,6 @@
 
-            b : integer = 1;
-            main: function void () {} 
-            
-            foo: function void (b: auto, c: integer) {
-                a : integer = 1;
-                {
-                    d: integer = 1;
-                }
-                {
-                    d: integer = 1;
-                }
-                d : integer = 1 + true;
-                a : integer = 1;
-            }
-            t: float = 1; 
+            a: integer;
+            t: float;
+            a: auto;
+            main: function void() {}
         

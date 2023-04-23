@@ -1,0 +1,8 @@
+
+            too: function auto (a: auto, b: integer) {}
+            main: function void() {
+                arr: array [2] of float = {4.2,6.2};
+                too(arr, 1);
+                i: auto = too(arr, 2);
+            }
+        

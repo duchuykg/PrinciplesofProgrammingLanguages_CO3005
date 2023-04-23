@@ -1,1 +1,1 @@
-Type mismatch in expression: ArrayCell(d, [IntegerLit(4)])
+Undeclared Function: goo

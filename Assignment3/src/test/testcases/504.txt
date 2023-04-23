@@ -1,3 +1,4 @@
 
             b: auto;
+            main: function void() {}
         

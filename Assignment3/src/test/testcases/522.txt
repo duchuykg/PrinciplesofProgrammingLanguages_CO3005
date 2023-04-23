@@ -1,9 +1,9 @@
-     
-            main: function void () {} 
-            i : string = "Duc Huy";
-            foo: function void (a: array [1] of integer, c: integer) {
-                if ("1" :: " ") return;
+
+            too: function auto (a: integer, b: integer) inherit bar{
+                super(2,3);
+                t: integer;
             }
-            foo1: function float () {}
-            t: float = 1; 
+            a: auto = 2.5 - too(2,3);
+            bar: function auto (b: integer, inherit c: integer) {}
+            main: function void() {}
         

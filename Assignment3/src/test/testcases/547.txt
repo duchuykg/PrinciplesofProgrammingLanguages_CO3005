@@ -1,0 +1,9 @@
+
+            too: function auto (a: integer, b: integer) inherit bar{
+                super(2,3);
+                i: auto = 2;
+                for (i = bar(2,4) + 5, i <= 5, i + 1){}
+            }
+            bar: function auto (b: integer, inherit c: integer) {}
+            main: function void() {}
+        

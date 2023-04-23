@@ -1,9 +1,11 @@
 
-            main: function auto (a: integer, b: integer) inherit bar{
+            too: function auto (a: integer, b: integer) inherit bar{
+                super(2,3);
                 m: auto = 3.5;
                 while (true) {
                     t: auto;
                 }
             }
             bar: function auto (b: integer, inherit c: integer) {}
+            main: function void() {}
         

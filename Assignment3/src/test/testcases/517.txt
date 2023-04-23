@@ -1,9 +1,4 @@
-     
-            main: function void () {} 
-            i : integer = 1;
-            foo: function void (a: array [1] of integer, c: integer) {
-                a[1,2] = 3;
-            }
-            foo1: function float () {}
-            t: float = 1; 
+
+            t: float = 1 + 2;
+            main: function void() {}
         

@@ -1,0 +1,6 @@
+
+            foo: function auto (a: auto, b: auto) {
+                s: string = a + b;
+            }
+            main: function void() {}
+        

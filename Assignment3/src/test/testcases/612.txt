@@ -1,0 +1,9 @@
+
+            a: array [3,2,2] of integer = {too(), {{1,2}, goo()}, {{4,3}, {5, foo()}}};
+            main: function void() {
+                printString(foo());
+            }
+            foo: function auto () {}
+            goo: function auto () {}
+            too: function auto () {}
+        

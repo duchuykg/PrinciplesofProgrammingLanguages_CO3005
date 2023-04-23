@@ -1,1 +1,1 @@
-Type mismatch in expression: BinExpr(>, Id(i), IntegerLit(2))
+Type mismatch in Variable Declaration: VarDecl(t, IntegerType, BinExpr(+, FloatLit(1.5), IntegerLit(2)))

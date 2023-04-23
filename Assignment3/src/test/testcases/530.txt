@@ -1,20 +1,9 @@
-     
-            main: function void () {
-                a: array[2,2] of integer = {{3,4},{3,4}};
-                b: array [1] of integer = { {1 , 2}, { 1,1.5} };
-            } 
-            i : float = 1;
-            foo2: function integer (d: integer, e: string){}
-            foo: function integer (a: array [1] of integer, c: auto) {
-                d : integer;
-                foo2(d, c);
-                if (d == 1) break;
-                for (d = 1, d < 10, 1 + 2){
-                    return 1;
-                    break;
-                    if (d == 1) break;
-                }
+
+            too: function auto (a: integer, b: integer) inherit bar{
+                super(2,3);
             }
-            foo1: function float () {}
-            t: float = 1; 
+            d: float = 25;
+            n: auto = 12 >= d;
+            bar: function auto (b: integer, inherit c: integer) {}
+            main: function void() {}
         

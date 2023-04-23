@@ -1,0 +1,10 @@
+
+            a: array [3,2,2] of integer = {too(), goo(), foo()};
+            main: function void() {
+                m: array [2,2] of integer = foo();
+                m[1, 1] = 1.4;
+            }
+            foo: function auto () {}
+            goo: function auto () {}
+            too: function auto () {}
+        

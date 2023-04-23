@@ -1,1 +1,1 @@
-Type mismatch in statement: IfStmt(BinExpr(::, StringLit(1), StringLit( )), ReturnStmt())
+Type mismatch in Variable Declaration: VarDecl(b, IntegerType, BinExpr(+, Id(a), IntegerLit(5)))

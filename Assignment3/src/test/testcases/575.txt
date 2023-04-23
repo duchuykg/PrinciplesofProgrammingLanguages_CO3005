@@ -1,0 +1,7 @@
+
+            too: function auto (a: auto, b: integer) {}
+            main: function void() {
+                arr: array [2] of float = {4.2,6.2};
+                t: float = arr[1,2];
+            }
+        

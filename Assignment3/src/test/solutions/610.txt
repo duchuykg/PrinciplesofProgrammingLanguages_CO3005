@@ -1,0 +1,1 @@
+Type mismatch in Variable Declaration: VarDecl(a, ArrayType([3, 2, 2], IntegerType), ArrayLit([FuncCall(too, []), FuncCall(goo, []), FuncCall(foo, [])]))

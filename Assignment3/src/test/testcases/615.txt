@@ -1,0 +1,8 @@
+
+            main: function void() {
+                m: integer = readFloat();
+                n: auto;
+            }
+            goo: function auto () {}
+            too: function auto () {}
+        

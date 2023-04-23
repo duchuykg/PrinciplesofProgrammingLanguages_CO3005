@@ -1,0 +1,8 @@
+
+            foo: function auto (a: integer) inherit too  {
+                preventDefault();
+                b = a + 5;
+            } 
+            too: function auto (a: integer, inherit b: integer) {}
+            main: function void() {}
+        

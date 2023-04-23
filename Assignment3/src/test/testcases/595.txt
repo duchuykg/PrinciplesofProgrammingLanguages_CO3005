@@ -1,0 +1,17 @@
+
+            foo: function auto (a: integer) inherit too  {
+                super(2, 3);
+                if (true) {
+                    if (false) {
+                        return "b";
+                    } else {
+                        return "eojoaf";
+                    }
+                    return 2;
+                } else {
+                    return 1.2;
+                }
+            } 
+            too: function auto (a: integer, inherit b: integer) {}
+            main: function void() {}
+        

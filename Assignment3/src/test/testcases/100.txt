@@ -1,0 +1,22 @@
+     
+            main: function void () {
+                a: array[2,2] of integer = {{3,4},{3,4}};
+            } 
+            i : float = 1;
+            c: auto = "hehe";
+            foo3: function void (d: integer, e: string){}
+            foo2: function integer (h: integer, e: string) inherit foo {
+                super(h, c);
+            }
+            foo: function integer (inherit h: integer, h: string) {
+                d : integer;
+                foo3(d, g);
+                for (d = 1, d < 10, 1 + 2){
+                    return 1;
+                    break;
+                    if (d == 1) break;
+                }
+            }
+            foo1: function float () {}
+            t: float = 1; 
+        

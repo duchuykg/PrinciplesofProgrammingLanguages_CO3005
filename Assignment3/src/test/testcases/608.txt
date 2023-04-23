@@ -1,0 +1,8 @@
+
+            a: array [2,2] of integer = {foo(), goo()};
+            main: function void() {
+                m: string = foo();
+            }
+            foo: function auto () {}
+            goo: function auto () {}
+        

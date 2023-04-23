@@ -1,0 +1,8 @@
+
+            main: function void() {
+                m: integer = goo({too(), 3}, 5);
+                i: float = !too();
+            }
+            goo: function auto (a: array [2] of integer, b: auto) {}
+            too: function auto () {}
+        

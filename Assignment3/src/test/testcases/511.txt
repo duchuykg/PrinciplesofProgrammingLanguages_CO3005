@@ -1,7 +1,13 @@
-  
-        main: function void () {}    
-            foo: function void (a: auto, c: integer) {
-                c = a; 
+
+            t: integer = 2;
+            too: function void (a: integer, b: integer) inherit bar {
+                super(2,3);
+                t: float;
+                {
+                    a: float;
+                    c: integer;
+                }
             }
-            t: float = 1; 
+            bar: function void (b: integer, inherit c: integer) {}
+            main: function void() {}
         

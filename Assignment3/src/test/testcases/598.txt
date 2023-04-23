@@ -1,0 +1,11 @@
+
+            foo: function auto (a: integer) inherit too  {
+                super(2, 3);
+                return 2;
+                return 2.5;
+                return "abc";
+                m: string = foo(2);
+            } 
+            too: function auto (a: integer, inherit b: integer) {}
+            main: function void() {}
+        

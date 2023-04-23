@@ -1,0 +1,9 @@
+
+            too: function auto (a: integer, b: integer) {
+                a1: auto = 2;
+                do {
+                    break;
+                } while (true);
+            }
+            main: function void() {}
+        

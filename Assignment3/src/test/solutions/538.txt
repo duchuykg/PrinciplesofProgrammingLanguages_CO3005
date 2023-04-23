@@ -1,1 +1,1 @@
-No entry point
+Type mismatch in statement: IfStmt(Id(m), BlockStmt([VarDecl(t, StringType, StringLit(hello))]))

@@ -1,0 +1,7 @@
+
+            a: array [2,3] of integer = {{1,2}, {3,4}};
+            main: function void() {
+            }
+            too: function void (a: auto, b: integer, inherit c: auto) {
+            }
+        

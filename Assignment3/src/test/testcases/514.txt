@@ -1,9 +1,9 @@
-       
-            t: float = 1;      
-            foo: function void (a: array [1] of integer, c: integer) {
-                a[4] = c; 
+
+            t: integer = 2;
+            main: function void (a: integer, b: integer) inherit bar{
+                super(2,3);
+                goo();
             }
-            main: function void () {
-                t = foo();
-            }  
+            bar: function void (b: integer, inherit c: integer) {}
+            main: function void() {}
         

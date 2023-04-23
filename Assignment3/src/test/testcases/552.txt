@@ -1,0 +1,13 @@
+
+            too: function auto (a: integer, b: integer) {
+                a1: auto = 2;
+                continue;
+                while (true) {
+                    a2: auto = 5;
+                    {
+                        a3: auto = b+a1;
+                    }
+                }
+            }
+            main: function void() {}
+        

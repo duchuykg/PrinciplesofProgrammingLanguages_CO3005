@@ -1,6 +1,6 @@
-     
-            foo: function void (a: auto, c: integer) {
-                c = a; 
-            }
-            t: float = 1; 
+
+            t: integer = 2;
+            main: function void ( a: integer, a: integer) inherit bar {}
+            bar: function void (inherit c: integer, b: integer) {}
+            main: function void() {}
         

@@ -1,0 +1,14 @@
+
+            a: float = 1; 
+            b: integer = 1; 
+            main: function void() {
+                c: string = "hello";
+                d: string = goo(a,b,c);
+            }
+            foo: function auto (m: integer) inherit goo {
+                preventDefault();
+                t: integer = a;
+            }
+            goo: function auto (a: auto, inherit b: integer, inherit c: auto) {
+            }
+        

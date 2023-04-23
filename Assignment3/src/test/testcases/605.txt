@@ -1,0 +1,7 @@
+
+            foo: function auto (a: auto) inherit goo {
+                super(2,3, true);
+            }
+            goo: function auto (a: integer, inherit b: auto) {}
+            main: function void() {}
+        

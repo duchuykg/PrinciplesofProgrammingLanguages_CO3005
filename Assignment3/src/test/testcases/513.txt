@@ -1,7 +1,6 @@
-  
-        main: function void () {}    
-            foo: function void (a: array [1] of integer, c: integer) {
-                d[4] = c; 
-            }
-            t: float = 1; 
+
+            t: integer = 2;
+            main: function void (a: integer, b: integer) inherit goo {}
+            bar: function void (b: integer, inherit c: integer) {}
+            main: function void() {}
         

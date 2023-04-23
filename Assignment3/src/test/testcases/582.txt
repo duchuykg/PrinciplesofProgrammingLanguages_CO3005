@@ -1,0 +1,6 @@
+
+            foo: function auto ()  {
+            } 
+            too: function auto (a: integer, inherit b: integer) {}
+            main: function void() {}
+        

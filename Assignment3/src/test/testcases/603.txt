@@ -1,0 +1,5 @@
+
+            foo: function auto (a: auto) inherit goo {}
+            goo: function auto () {}
+            main: function void() {}
+        

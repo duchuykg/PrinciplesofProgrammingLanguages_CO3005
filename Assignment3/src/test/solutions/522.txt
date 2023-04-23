@@ -1,1 +1,0 @@
-Type mismatch in statement: IfStmt(BinExpr(::, StringLit(1), StringLit( )), ReturnStmt())

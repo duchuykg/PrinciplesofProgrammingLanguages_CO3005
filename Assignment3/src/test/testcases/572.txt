@@ -1,0 +1,9 @@
+
+            b: integer = 1; 
+            too: function auto (a: auto, b: integer, c: auto) {}
+            a: float = 1; 
+            main: function void() {
+                c: string = "hello";
+                d: integer = too(a,b);
+            }
+        

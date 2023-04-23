@@ -1,0 +1,6 @@
+
+            foo: function auto (a: integer, b: integer) {
+                main();
+            }
+            main: function auto () {}
+        

@@ -1,10 +1,8 @@
-     
-            main: function void () {} 
-            i : float = 1;
-            foo: function void (a: array [1] of integer, c: float) {
-                for (c = 1, c < 10, 1 + 2)
-                    return 1;
+
+            too: function auto (a: integer, b: integer) inherit bar{
+                super(2,3);
             }
-            foo1: function float () {}
-            t: float = 1; 
+            m: float = too(1,3) % true;
+            bar: function auto (b: integer, inherit c: integer) {}
+            main: function void() {}
         
