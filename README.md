@@ -10,3 +10,7 @@ Assignment 1:
 Assignment 2: 
 
               93/96
+              
+Assignment 3: 
+
+              81/100
